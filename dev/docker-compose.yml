@@ -1,7 +1,7 @@
 services:
   prometheus:
     image: prom/prometheus:latest
-    container_name: prometheus
+    container_name: prometheus-dev
     ports:
       - "9090:9090"
     volumes:
@@ -11,7 +11,7 @@ services:
 
   grafana:
     image: grafana/grafana:latest
-    container_name: grafana
+    container_name: grafana-dev
     ports:
       - "3000:3000"
     environment:
@@ -22,7 +22,7 @@ services:
 
   ese-api-gateway:
     image: danielkluggy/ese-api-gateway:latest
-    container_name: ese-api-gateway
+    container_name: ese-api-gateway-dev
     ports:
       - "8080:8080"
     labels:
@@ -30,7 +30,7 @@ services:
 
   ese-ecommerce:
     image: danielkluggy/ese-ecommerce:2.0.0-dev
-    container_name: ese-ecommerce
+    container_name: ese-ecommerce-dev
     ports:
       - "8081:8081"
     labels:
@@ -38,7 +38,7 @@ services:
 
   ese-stock:
     image: danielkluggy/ese-stock:latest
-    container_name: ese-stock
+    container_name: ese-stock-dev
     ports:
       - "8082:8082"
     labels:
@@ -46,7 +46,7 @@ services:
   
   ese-customers:
     image: danielkluggy/ese-customers:latest
-    container_name: ese-customers
+    container_name: ese-customers-dev
     ports:
       - "8083:8083"
     labels:
