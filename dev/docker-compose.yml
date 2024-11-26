@@ -1,0 +1,61 @@
+services:
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    volumes:
+      - grafana-data:/var/lib/grafana
+
+  ese-api-gateway:
+    image: danielkluggy/ese-api-gateway:latest
+    container_name: ese-api-gateway
+    ports:
+      - "8080:8080"
+    labels:
+      - "prometheus_job=ese-api-gateway"
+
+  ese-ecommerce:
+    image: danielkluggy/ese-ecommerce:2.0.0-dev
+    container_name: ese-ecommerce
+    ports:
+      - "8081:8081"
+    labels:
+      - "prometheus_job=ese-ecommerce"
+
+  ese-stock:
+    image: danielkluggy/ese-stock:latest
+    container_name: ese-stock
+    ports:
+      - "8082:8082"
+    labels:
+      - "prometheus_job=ese-stock"
+  
+  ese-customers:
+    image: danielkluggy/ese-customers:latest
+    container_name: ese-customers
+    ports:
+      - "8083:8083"
+    labels:
+      - "prometheus_job=ese-customers"
+
+networks:
+  eseklugdorow:
+    name: eseklugdorow
+    external: true
+
+volumes:
+  grafana-data:

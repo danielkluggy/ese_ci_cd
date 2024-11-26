@@ -1,0 +1,26 @@
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: "ese-api-gateway"
+    metrics_path: "/actuator/prometheus"
+    static_configs:
+      - targets: ["ese-api-gateway:8080"]
+    basic_auth:
+      username: "admin"
+      password: "admin"
+
+  - job_name: "ese-ecommerce"
+    metrics_path: "/actuator/prometheus"
+    static_configs:
+      - targets: ["ese-ecommerce:8081"]
+  
+  - job_name: "ese-stock"
+    metrics_path: "/actuator/prometheus"
+    static_configs:
+      - targets: ["ese-stock:8082"]
+
+  - job_name: "ese-customers"
+    metrics_path: "/actuator/prometheus"
+    static_configs:
+      - targets: ["ese-customers:8083"]
